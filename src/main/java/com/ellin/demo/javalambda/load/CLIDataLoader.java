@@ -5,18 +5,20 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class CLIDataLoader implements CommandLineRunner {
+import javax.xml.crypto.Data;
 
-    @Autowired
-    DataLoader dataLoader;
+public class CLIDataLoader  {
+
 
     public static void main(String[] args) {
-        SpringApplication.run(CLIDataLoader.class, args);
+
+        CLIDataLoader cdl = new CLIDataLoader();
+        cdl.run(args);
+
     }
 
-    @Override
     public void run(String... args) {
+        DataLoader dataLoader = new DataLoader();
         dataLoader.load();
     }
 }

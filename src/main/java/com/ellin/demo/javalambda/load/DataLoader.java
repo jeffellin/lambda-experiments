@@ -17,20 +17,13 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
-@Component
 public class DataLoader {
-
-    @Autowired
-    JdbcTemplate template;
 
     public void load() {
 
-        Collections.nCopies(50000, 1)
-                .forEach(i -> {
-                    //System.out.println(i);
-                    addItem();
-                });
-
+        for (int i=0; i<50005;i++) {
+            addItem();
+        }
 
     }
 
@@ -49,7 +42,6 @@ public class DataLoader {
        //
         //
         //       "VALUES (?,?,?,?, ?,?);", UUID.randomUUID(),1,1,1,getOrderDate(),new java.sql.Timestamp(System.currentTimeMillis()) );
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
 
         //template.update("insert into order_data (txn_id,store_id,amount,order_date)" +
          //       "VALUES (?,?,?,?)",
@@ -86,9 +78,6 @@ public class DataLoader {
                 bw.write(content);
             }
 
-            // append to the file
-            try (FileOutputStream fos = new FileOutputStream(file, true)) {
-                fos.write(content.getBytes(StandardCharsets.UTF_8));
-            }
+
         }
 }
